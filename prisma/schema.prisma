@@ -1,0 +1,111 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "mysql"
+  url      = env("DATABASE_URL")
+}
+
+model buyer {
+  idbuyer         Int        @id @default(autoincrement())
+  worker_idworker Int
+  worker          worker     @relation(fields: [worker_idworker], references: [idworker], onDelete: Cascade, map: "fk_buyer_worker")
+  purchase        purchase[]
+
+  @@index([worker_idworker], map: "fk_buyer_worker_idx")
+}
+
+model director {
+  iddirector      Int    @id @default(autoincrement())
+  worker_idworker Int
+  worker          worker @relation(fields: [worker_idworker], references: [idworker], onDelete: Cascade, map: "fk_director_worker1")
+
+  @@index([worker_idworker], map: "fk_director_worker1_idx")
+}
+
+model purchase {
+  idpurchase          Int              @id @default(autoincrement())
+  purchase_date       DateTime         @db.Date
+  purchase_price      Float            @db.Float
+  supplier_idsupplier Int
+  buyer_idbuyer       Int
+  buyer               buyer            @relation(fields: [buyer_idbuyer], references: [idbuyer], map: "fk_purchase_buyer1")
+  supplier            supplier         @relation(fields: [supplier_idsupplier], references: [idsupplier], map: "fk_purchase_supplier1")
+  shoes_purchase      shoes_purchase[]
+
+  @@index([buyer_idbuyer], map: "fk_purchase_buyer1_idx")
+  @@index([supplier_idsupplier], map: "fk_purchase_supplier1_idx")
+}
+
+model sale {
+  idsale          Int          @id @default(autoincrement())
+  sale_date       DateTime     @db.Date
+  sale_price      Float        @db.Float
+  saller_idsaller Int
+  saller          saller       @relation(fields: [saller_idsaller], references: [idsaller], map: "fk_sale_saller1")
+  shoes_sale      shoes_sale[]
+
+  @@index([saller_idsaller], map: "fk_sale_saller1_idx")
+}
+
+model saller {
+  idsaller        Int    @id @default(autoincrement())
+  worker_idworker Int
+  sale            sale[]
+  worker          worker @relation(fields: [worker_idworker], references: [idworker], onDelete: Cascade, map: "fk_saller_worker1")
+
+  @@index([worker_idworker], map: "fk_saller_worker1_idx")
+}
+
+model shoes {
+  idshoes        Int              @id @default(autoincrement())
+  model          String           @db.VarChar(100)
+  size           Int
+  article        String           @db.VarChar(15)
+  season         String           @db.VarChar(15)
+  brand          String           @db.VarChar(150)
+  sex            String           @db.VarChar(45)
+  price          Float            @db.Float
+  amount         Int              @default(1)
+  shoes_purchase shoes_purchase[]
+  shoes_sale     shoes_sale[]
+}
+
+model shoes_purchase {
+  purchase_idpurchase Int
+  shoes_idshoes       Int
+  purchase            purchase @relation(fields: [purchase_idpurchase], references: [idpurchase], onUpdate: Restrict, map: "fk_purchase_has_shoes_purchase1")
+  shoes               shoes    @relation(fields: [shoes_idshoes], references: [idshoes], onUpdate: Restrict, map: "fk_purchase_has_shoes_shoes1")
+
+  @@id([purchase_idpurchase, shoes_idshoes])
+  @@index([shoes_idshoes], map: "fk_purchase_has_shoes_shoes1_idx")
+}
+
+model shoes_sale {
+  shoes_idshoes Int
+  sale_idsale   Int
+  sale          sale  @relation(fields: [sale_idsale], references: [idsale], map: "fk_shoes_has_sale_sale1")
+  shoes         shoes @relation(fields: [shoes_idshoes], references: [idshoes], map: "fk_shoes_has_sale_shoes1")
+
+  @@id([shoes_idshoes, sale_idsale])
+  @@index([sale_idsale], map: "fk_shoes_has_sale_sale1_idx")
+  @@index([shoes_idshoes], map: "fk_shoes_has_sale_shoes1_idx")
+}
+
+model supplier {
+  idsupplier    Int        @id @default(autoincrement())
+  supplier_name String     @db.VarChar(250)
+  address       String     @db.VarChar(250)
+  purchase      purchase[]
+}
+
+model worker {
+  idworker           Int        @id @default(autoincrement())
+  fullname           String     @db.VarChar(250)
+  passportdata       String     @db.VarChar(255)
+  data_of_employment DateTime   @db.Date
+  buyer              buyer[]
+  director           director[]
+  saller             saller[]
+}
