@@ -3,7 +3,6 @@ import { CreateBuyerDto } from './dto/create-buyer.dto';
 import { UpdateBuyerDto } from './dto/update-buyer.dto';
 import { PrismaService } from 'src/prisma/prisma.service';
 
-
 @Injectable()
 export class BuyerService {
   constructor(private prisma: PrismaService) {}
