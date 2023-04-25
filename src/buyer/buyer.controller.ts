@@ -3,7 +3,7 @@ import { BuyerService } from './buyer.service';
 import { CreateBuyerDto } from './dto/create-buyer.dto';
 import { UpdateBuyerDto } from './dto/update-buyer.dto';
 
-@Controller('buyer')
+@Controller('buyers')
 export class BuyerController {
   constructor(private readonly buyerService: BuyerService) {}
 

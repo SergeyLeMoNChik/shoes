@@ -1,7 +1,7 @@
 import { Controller, Get, Post, Param, Delete } from '@nestjs/common';
 import { DirectorService } from './director.service';
 
-@Controller('director')
+@Controller('directors')
 export class DirectorController {
   constructor(private readonly directorService: DirectorService) {}
 
