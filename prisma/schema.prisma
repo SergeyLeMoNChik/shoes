@@ -8,20 +8,21 @@ datasource db {
 }
 
 model buyer {
-  idbuyer         Int        @id @default(autoincrement())
-  worker_idworker Int
-  worker          worker     @relation(fields: [worker_idworker], references: [idworker], onDelete: Cascade, map: "fk_buyer_worker")
-  purchase        purchase[]
+  idbuyer             Int        @id @default(autoincrement())
+  fullname            String?    @db.VarChar(250)
+  pasportdata         String?    @db.VarChar(255)
+  data_of_employment  DateTime?  @map("data_of employment") @db.Date
+  director_iddirector Int?
+  director            director?  @relation(fields: [director_iddirector], references: [iddirector], onDelete: NoAction, onUpdate: NoAction, map: "fk_buyer_director1")
+  purchase            purchase[]
 
-  @@index([worker_idworker], map: "fk_buyer_worker_idx")
+  @@index([director_iddirector], map: "fk_buyer_director1_idx")
 }
 
 model director {
-  iddirector      Int    @id @default(autoincrement())
-  worker_idworker Int
-  worker          worker @relation(fields: [worker_idworker], references: [idworker], onDelete: Cascade, map: "fk_director_worker1")
-
-  @@index([worker_idworker], map: "fk_director_worker1_idx")
+  iddirector Int      @id @default(autoincrement())
+  buyer      buyer[]
+  saller     saller[]
 }
 
 model purchase {
@@ -50,12 +51,15 @@ model sale {
 }
 
 model saller {
-  idsaller        Int    @id @default(autoincrement())
-  worker_idworker Int
-  sale            sale[]
-  worker          worker @relation(fields: [worker_idworker], references: [idworker], onDelete: Cascade, map: "fk_saller_worker1")
+  idsaller            Int       @id @default(autoincrement())
+  fullname            String?   @db.VarChar(250)
+  pasportdata         String?   @db.VarChar(255)
+  data_of_employment  DateTime? @db.Date
+  director_iddirector Int?
+  sale                sale[]
+  director            director? @relation(fields: [director_iddirector], references: [iddirector], onDelete: NoAction, onUpdate: NoAction, map: "fk_saller_director1")
 
-  @@index([worker_idworker], map: "fk_saller_worker1_idx")
+  @@index([director_iddirector], map: "fk_saller_director1_idx")
 }
 
 model shoes {
@@ -98,14 +102,4 @@ model supplier {
   supplier_name String     @db.VarChar(250)
   address       String     @db.VarChar(250)
   purchase      purchase[]
-}
-
-model worker {
-  idworker           Int        @id @default(autoincrement())
-  fullname           String     @db.VarChar(250)
-  passportdata       String     @db.VarChar(255)
-  data_of_employment DateTime   @db.Date
-  buyer              buyer[]
-  director           director[]
-  saller             saller[]
 }
