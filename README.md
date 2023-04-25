@@ -58,6 +58,10 @@ $ npm run test:e2e
 $ npm run test:cov
 ```
 
+## API 
+
+[![Run in Postman](https://run.pstmn.io/button.svg)](https://app.getpostman.com/run-collection/22806537-c7b1f1f4-2630-4091-8573-f049e66df3fd?action=collection%2Ffork&collection-url=entityId%3D22806537-c7b1f1f4-2630-4091-8573-f049e66df3fd%26entityType%3Dcollection%26workspaceId%3D51721580-beee-4854-a78d-f3b6c139146f)
+
 ## Support
 
 Nest is an MIT-licensed open source project. It can grow thanks to the sponsors and support by the amazing backers. If you'd like to join them, please [read more here](https://docs.nestjs.com/support).
