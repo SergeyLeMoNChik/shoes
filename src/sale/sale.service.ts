@@ -7,7 +7,7 @@ import { PrismaService } from 'src/prisma/prisma.service';
 export class SaleService {
   constructor(private prisma: PrismaService) {}
 
-  create(createSaleDto: CreateSaleDto) {
+  async create(createSaleDto: CreateSaleDto) {
     const idShoes = []
 
     for (const id of createSaleDto.shoes_idshoes) {
@@ -31,7 +31,7 @@ export class SaleService {
     });
   }
 
-  findAll() {
+  async findAll() {
     return this.prisma.sale.findMany({
       include: {
         shoes_sale: true,
@@ -39,7 +39,7 @@ export class SaleService {
     });
   }
 
-  findOne(id: number) {
+  async findOne(id: number) {
     return this.prisma.sale.findUnique({
       where: {
         idsale: id,
@@ -50,7 +50,7 @@ export class SaleService {
     });
   }
 
-  update(id: number, updateSaleDto: UpdateSaleDto) {
+  async update(id: number, updateSaleDto: UpdateSaleDto) {
     const idShoes = []
 
     for (const id of updateSaleDto.shoes_idshoes) {
