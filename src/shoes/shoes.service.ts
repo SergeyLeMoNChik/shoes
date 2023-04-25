@@ -14,7 +14,7 @@ export class ShoesService {
   }
 
   findAll() {
-    return this.prisma.shoes.findMany()
+    return this.prisma.shoes.findMany();
   }
 
   findOne(id: number) {
@@ -37,7 +37,7 @@ export class ShoesService {
   remove(id: number) {
     return this.prisma.shoes.delete({
       where: {
-        idshoes: id
+        idshoes: id,
       },
     });
   }
