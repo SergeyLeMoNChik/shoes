@@ -7,25 +7,25 @@ import { PrismaService } from 'src/prisma/prisma.service';
 export class ShoesService {
   constructor(private prisma: PrismaService) {}
 
-  create(createShoeDto: CreateShoeDto) {
+  async create(createShoeDto: CreateShoeDto) {
     return this.prisma.shoes.create({
       data: createShoeDto,
     });
   }
 
-  findAll() {
+  async findAll() {
     return this.prisma.shoes.findMany();
   }
 
-  findOne(id: number) {
-    return this.prisma.shoes.findUnique({
+  async findOne(id: number) {
+    return this.prisma.shoes.findUniqueOrThrow({
       where: {
         idshoes: id,
       },
     });
   }
 
-  update(id: number, updateShoeDto: UpdateShoeDto) {
+  async update(id: number, updateShoeDto: UpdateShoeDto) {
     return this.prisma.shoes.update({
       where: {
         idshoes: id,
@@ -34,7 +34,7 @@ export class ShoesService {
     });
   }
 
-  remove(id: number) {
+  async remove(id: number) {
     return this.prisma.shoes.delete({
       where: {
         idshoes: id,

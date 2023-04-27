@@ -16,7 +16,7 @@ export class DirectorService {
   }
 
   findOne(id: number) {
-    return this.prisma.director.findUnique({
+    return this.prisma.director.findUniqueOrThrow({
       where: {
         iddirector: id,
       },

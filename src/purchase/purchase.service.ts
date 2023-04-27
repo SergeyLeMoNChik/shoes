@@ -43,7 +43,7 @@ export class PurchaseService {
   }
 
   async findOne(id: number) {
-    return this.prisma.purchase.findUnique({
+    return this.prisma.purchase.findUniqueOrThrow({
       where: {
         idpurchase: id,
       },

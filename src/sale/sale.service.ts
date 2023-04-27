@@ -40,7 +40,7 @@ export class SaleService {
   }
 
   async findOne(id: number) {
-    return this.prisma.sale.findUnique({
+    return this.prisma.sale.findUniqueOrThrow({
       where: {
         idsale: id,
       },

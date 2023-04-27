@@ -1,8 +1,10 @@
-import { IsDate } from 'class-validator';
+import { IsDate, IsNotEmpty } from 'class-validator';
 import { Type } from 'class-transformer';
 
 export class CreateSallerDto {
+    @IsNotEmpty()
     fullname: string;
+    @IsNotEmpty()
     pasportdata: string;
 
     @Type(()=> Date)
