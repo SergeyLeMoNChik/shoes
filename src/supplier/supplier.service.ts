@@ -18,7 +18,7 @@ export class SupplierService {
   }
 
   findOne(id: number) {
-    return this.prisma.supplier.findUnique({
+    return this.prisma.supplier.findUniqueOrThrow({
       where: {
         idsupplier: id,
       },

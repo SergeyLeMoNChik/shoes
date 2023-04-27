@@ -18,7 +18,7 @@ export class BuyerService {
   }
 
   findOne(id: number) {
-    return this.prisma.buyer.findUnique({
+    return this.prisma.buyer.findUniqueOrThrow({
       where: {
         idbuyer: id,
       },

@@ -8,27 +8,27 @@ export class BuyerController {
   constructor(private readonly buyerService: BuyerService) {}
 
   @Post()
-  create(@Body() createBuyerDto: CreateBuyerDto) {
+  async create(@Body() createBuyerDto: CreateBuyerDto) {
     return this.buyerService.create(createBuyerDto);
   }
 
   @Get()
-  findAll() {
+  async findAll() {
     return this.buyerService.findAll();
   }
 
   @Get(':id')
-  findOne(@Param('id') id: string) {
+  async findOne(@Param('id') id: string) {
     return this.buyerService.findOne(+id);
   }
 
   @Patch(':id')
-  update(@Param('id') id: string, @Body() updateBuyerDto: UpdateBuyerDto) {
+  async update(@Param('id') id: string, @Body() updateBuyerDto: UpdateBuyerDto) {
     return this.buyerService.update(+id, updateBuyerDto);
   }
 
   @Delete(':id')
-  remove(@Param('id') id: string) {
+  async remove(@Param('id') id: string) {
     return this.buyerService.remove(+id);
   }
 }

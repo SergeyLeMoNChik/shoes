@@ -12,6 +12,5 @@ import { PurchaseModule } from './purchase/purchase.module';
 @Module({
   imports: [ShoesModule, DirectorModule, BuyerModule, SallerModule, SaleModule, SupplierModule, PurchaseModule],
   controllers: [AppController],
-  providers: [AppService],
-})
+  providers: [AppService]})
 export class AppModule {}

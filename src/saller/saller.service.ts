@@ -18,7 +18,7 @@ export class SallerService {
   }
 
   findOne(id: number) {
-    return this.prisma.saller.findUnique({
+    return this.prisma.saller.findUniqueOrThrow({
       where: {
         idsaller: id,
       },
