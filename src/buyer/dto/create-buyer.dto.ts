@@ -6,13 +6,12 @@ export class CreateBuyerDto {
     @IsString()
     fullname: string;
 
-    @IsPassportNumber("643")
+    @IsString()
     pasportdata: string;
 
     @Type(()=> Date)
     @IsDate()
     data_of_employment: Date;
 
-    @IsNumber()
     director_iddirector: number;
 }

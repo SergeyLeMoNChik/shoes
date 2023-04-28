@@ -1,6 +1,8 @@
 import { shoes } from "@prisma/client";
 
 export class Shoe{
+    Id: number;
+
     Model: string;
 
     Size: number;
@@ -18,6 +20,7 @@ export class Shoe{
     Amount: number;
 
     constructor(partial: Partial<shoes>) {
+        this.Id = partial.idshoes;
         this.Model = partial.model;
         this.Size = partial.size;
         this.Article = partial.article;

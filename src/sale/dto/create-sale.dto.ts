@@ -7,13 +7,11 @@ export class CreateSaleDto {
     @IsDate()
     sale_date: Date;
 
-    @IsLatLong()
+    @IsNumber()
     sale_price: number;
 
     @IsNumber()
-    @IsInt()
     saller_idsaller: number;
 
-    @IsNumber()
     shoes_idshoes: number[];
 }
