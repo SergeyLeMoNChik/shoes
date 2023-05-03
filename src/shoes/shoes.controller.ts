@@ -10,9 +10,7 @@ export class ShoesController {
 
   @Post()
   async create(@Body() createShoeDto: CreateShoeDto) {
-    return new Shoe( 
-      await this.shoesService.create(createShoeDto) 
-    );
+    return  await this.shoesService.create(new Shoe (createShoeDto));
   }
   
   @Get()

@@ -1,33 +1,33 @@
 import { shoes } from "@prisma/client";
 
 export class Shoe{
-    Id: number;
+    id: number;
 
-    Model: string;
+    model: string;
 
-    Size: number;
+    size: number;
 
-    Article: string;
+    article: string;
 
-    Season: string;
+    season: string;
 
-    Brand: string;
+    brand: string;
 
-    Sex: string;
+    sex: string;
 
-    Price: number;
+    price: number;
 
-    Amount: number;
+    amount: number;
 
     constructor(partial: Partial<shoes>) {
-        this.Id = partial.idshoes;
-        this.Model = partial.model;
-        this.Size = partial.size;
-        this.Article = partial.article;
-        this.Season = partial.season;
-        this.Brand = partial.brand;
-        this.Sex = partial.sex;
-        this.Price = partial.price;
-        this.Amount = partial.amount;
+        this.id = partial.idshoes;
+        this.model = partial.model;
+        this.size = Number(partial.size);
+        this.article = partial.article;
+        this.season = partial.season;
+        this.brand = partial.brand;
+        this.sex = partial.sex;
+        this.price = Number(partial.price);
+        this.amount = Number(partial.amount) ;
     }
 }
