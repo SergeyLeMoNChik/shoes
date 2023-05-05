@@ -1,4 +1,4 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete, Query} from '@nestjs/common';
+import { Controller, Get, Post, Body, Param, Delete, Query, Put} from '@nestjs/common';
 import { ShoesService } from './shoes.service';
 import { CreateShoeDto } from './dto/create-shoe.dto';
 import { UpdateShoeDto } from './dto/update-shoe.dto';
@@ -10,7 +10,7 @@ export class ShoesController {
 
   @Post()
   async create(@Body() createShoeDto: CreateShoeDto) {
-    return  await this.shoesService.create(new Shoe (createShoeDto));
+    return await this.shoesService.create(new Shoe (createShoeDto));
   }
   
   @Get()
@@ -25,7 +25,7 @@ export class ShoesController {
     return new Shoe(shoe)
   }
 
-  @Patch(':id')
+  @Put(':id')
   async update(@Param('id') id: string, @Body() updateShoeDto: UpdateShoeDto) {
     return new Shoe(
       await this.shoesService.update(+id, updateShoeDto)
